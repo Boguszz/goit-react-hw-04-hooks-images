@@ -1,4 +1,4 @@
-import { Component } from 'react';
+import { useState, useEffect } from 'react';
 import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import fetchImages from '../../services/images-api';
@@ -8,25 +8,21 @@ import Button from 'components/Button';
 import Loader from 'components/Loader';
 import Modal from 'components/Modal';
 
-class App extends Component {
-  state = {
-    query: '',
-    page: 1,
-    imagesOnPage: 0,
-    totalImages: 0,
-    isLoading: false,
-    showModal: false,
-    images: null,
-    error: null,
-    currentImageUrl: null,
-    currentImageDescription: null,
-  };
+function App() {
+  const [query, setQuery] = useState('');
+  const [page, setPage] = useState(1);
+  const [imagesOnPage, setImagesOnPage] = useState(0);
+  const [totalImages, setTotalImages] = useState(0);
+  const [isLoading, setIsLoading] = useState(false);
+  const [showModal, setShowModal] = useState(false);
+  const [images, setImages] = useState(null);
+  const [errors, setErrors] = useState(null);
+  const [currentImageUrl, setCurrentImageUrl] = useState(null);
+  const [currentImageDescription, setCurrentImageDescription] = useState(null);
 
-  componentDidUpdate(prevProps, prevState) {
-    const { query, page } = this.state;
-
-    if (prevState.query !== query) {
-      this.setState(({ isLoading }) => ({ isLoading: !isLoading }));
+  useEffect(() => {
+    if (query !== '') {
+      setIsLoading(prevIsLoading => !prevIsLoading);
 
       fetchImages(query)
         .then(({ hits, totalHits }) => {
@@ -37,22 +33,19 @@ class App extends Component {
             largeImage: hit.largeImageURL,
           }));
 
-          return this.setState({
-            page: 1,
-            images: imagesArray,
-            imagesOnPage: imagesArray.length,
-            totalImages: totalHits,
-          });
+          setPage(1);
+          setImages(imagesArray);
+          setImagesOnPage(imagesArray.length);
+          setTotalImages(totalHits);
         })
-        .catch(error => this.setState({ error }))
-        .finally(() =>
-          this.setState(({ isLoading }) => ({ isLoading: !isLoading }))
-        );
+        .catch(errors => setErrors(errors))
+        .finally(() => setIsLoading(prevIsLoading => !prevIsLoading));
     }
+  }, [query]);
 
-    if (prevState.page !== page && page !== 1) {
-      this.setState(({ isLoading }) => ({ isLoading: !isLoading }));
-
+  useEffect(() => {
+    if (page !== 1) {
+      setIsLoading(prevIsLoading => !prevIsLoading);
       fetchImages(query, page)
         .then(({ hits }) => {
           const imagesArray = hits.map(hit => ({
@@ -62,85 +55,54 @@ class App extends Component {
             largeImage: hit.largeImageURL,
           }));
 
-          return this.setState(({ images, imagesOnPage }) => {
-            return {
-              images: [...images, ...imagesArray],
-              imagesOnPage: imagesOnPage + imagesArray.length,
-            };
-          });
+          setImages(prevImages => [...prevImages, ...imagesArray]);
+          setImagesOnPage(
+            prevImagesOnPage => prevImagesOnPage + imagesArray.length
+          );
         })
-        .catch(error => this.setState({ error }))
-        .finally(() =>
-          this.setState(({ isLoading }) => ({ isLoading: !isLoading }))
-        );
+        .catch(errors => setErrors(errors))
+        .finally(() => setIsLoading(prevIsLoading => !prevIsLoading));
     }
-  }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [page]);
 
-  getSearchRequest = query => {
-    this.setState({ query });
-  };
+  const getSearchRequest = query => setQuery(query);
 
-  onNextFetch = () => {
-    this.setState(({ page }) => ({ page: page + 1 }));
-  };
+  const onNextFetch = () => setPage(prevPage => prevPage + 1);
 
-  toggleModal = () => {
-    this.setState(({ showModal }) => ({ showModal: !showModal }));
-  };
+  const toggleModal = () => setShowModal(prevShowModal => !prevShowModal);
 
-  openModal = e => {
-    const currentImageUrl = e.target.dataset.large;
-    const currentImageDescription = e.target.alt;
-
+  const openModal = e => {
     if (e.target.nodeName === 'IMG') {
-      this.setState(({ showModal }) => ({
-        showModal: !showModal,
-        currentImageUrl: currentImageUrl,
-        currentImageDescription: currentImageDescription,
-      }));
+      setShowModal(prevShowModal => !prevShowModal);
+      setCurrentImageUrl(e.target.dataset.large);
+      setCurrentImageDescription(e.target.alt);
     }
   };
 
-  render() {
-    const {
-      images,
-      imagesOnPage,
-      totalImages,
-      isLoading,
-      showModal,
-      currentImageUrl,
-      currentImageDescription,
-    } = this.state;
+  return (
+    <>
+      <Searchbar onSubmit={getSearchRequest} />
 
-    const getSearchRequest = this.getSearchRequest;
-    const onNextFetch = this.onNextFetch;
-    const openModal = this.openModal;
-    const toggleModal = this.toggleModal;
+      {images && <ImageGallery images={images} openModal={openModal} />}
 
-    return (
-      <>
-        <Searchbar onSubmit={getSearchRequest} />
+      {isLoading && <Loader />}
 
-        {images && <ImageGallery images={images} openModal={openModal} />}
+      {imagesOnPage >= 12 && imagesOnPage < totalImages && (
+        <Button onNextFetch={onNextFetch} />
+      )}
 
-        {isLoading && <Loader />}
+      {showModal && (
+        <Modal
+          onClose={toggleModal}
+          currentImageUrl={currentImageUrl}
+          currentImageDescription={currentImageDescription}
+        />
+      )}
 
-        {imagesOnPage >= 12 && imagesOnPage < totalImages && (
-          <Button onNextFetch={onNextFetch} />
-        )}
-
-        {showModal && (
-          <Modal
-            onClose={toggleModal}
-            currentImageUrl={currentImageUrl}
-            currentImageDescription={currentImageDescription}
-          />
-        )}
-
-        <ToastContainer />
-      </>
-    );
-  }
+      <ToastContainer />
+    </>
+  );
 }
 
 export default App;
