@@ -16,9 +16,13 @@ function App() {
   const [isLoading, setIsLoading] = useState(false);
   const [showModal, setShowModal] = useState(false);
   const [images, setImages] = useState(null);
-  const [errors, setErrors] = useState(null);
+  const [error, setError] = useState(null);
   const [currentImageUrl, setCurrentImageUrl] = useState(null);
   const [currentImageDescription, setCurrentImageDescription] = useState(null);
+
+  if (error) {
+    console.log(error);
+  }
 
   useEffect(() => {
     if (query !== '') {
@@ -38,7 +42,7 @@ function App() {
           setImagesOnPage(imagesArray.length);
           setTotalImages(totalHits);
         })
-        .catch(errors => setErrors(errors))
+        .catch(error => setError(error))
         .finally(() => setIsLoading(prevIsLoading => !prevIsLoading));
     }
   }, [query]);
@@ -60,7 +64,7 @@ function App() {
             prevImagesOnPage => prevImagesOnPage + imagesArray.length
           );
         })
-        .catch(errors => setErrors(errors))
+        .catch(error => setError(error))
         .finally(() => setIsLoading(prevIsLoading => !prevIsLoading));
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
