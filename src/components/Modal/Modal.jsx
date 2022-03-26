@@ -6,7 +6,7 @@ import css from './Modal.module.css';
 
 const modalRoot = document.querySelector('#modal-root');
 
-function Modal({ title, onClose, currentImageUrl, currentImageDescription }) {
+function Modal({ onClose, currentImageUrl, currentImageDescription }) {
   useEffect(() => {
     const handleKeyDown = e => {
       if (e.code === 'Escape') {
@@ -29,7 +29,9 @@ function Modal({ title, onClose, currentImageUrl, currentImageDescription }) {
     <div className={css.backdrop} onClick={handleClickBackdrop}>
       <div className={css.modal}>
         <div className={css.wrapper}>
-          {title && <h1 className={css.title}>{title}</h1>}
+          {currentImageDescription && (
+            <h1 className={css.title}>{currentImageDescription}</h1>
+          )}
           <button className={css.button} type="button" onClick={onClose}>
             <BsXLg className={css.icon} />
           </button>
@@ -46,7 +48,6 @@ function Modal({ title, onClose, currentImageUrl, currentImageDescription }) {
 }
 
 Modal.prototype = {
-  title: PropTypes.string,
   onClose: PropTypes.func.isRequired,
   currentImageUrl: PropTypes.string,
   currentImageDescription: PropTypes.string,

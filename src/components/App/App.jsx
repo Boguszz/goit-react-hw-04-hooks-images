@@ -27,8 +27,7 @@ function App() {
   useEffect(() => {
     if (query !== '') {
       setIsLoading(prevIsLoading => !prevIsLoading);
-
-      fetchImages(query)
+      fetchImages(query, page)
         .then(({ hits, totalHits }) => {
           const imagesArray = hits.map(hit => ({
             id: hit.id,
@@ -36,41 +35,33 @@ function App() {
             smallImage: hit.webformatURL,
             largeImage: hit.largeImageURL,
           }));
-
-          setPage(1);
-          setImages(imagesArray);
-          setImagesOnPage(imagesArray.length);
           setTotalImages(totalHits);
+          return imagesArray;
+        })
+        .then(imagesArray => {
+          if (page === 1) {
+            setImages(imagesArray);
+            setImagesOnPage(imagesArray.length);
+          }
+          return imagesArray;
+        })
+        .then(imagesArray => {
+          if (page !== 1) {
+            setImages(prevImages => [...prevImages, ...imagesArray]);
+            setImagesOnPage(
+              prevImagesOnPage => prevImagesOnPage + imagesArray.length
+            );
+          }
         })
         .catch(error => setError(error))
         .finally(() => setIsLoading(prevIsLoading => !prevIsLoading));
     }
-  }, [query]);
+  }, [page, query]);
 
-  useEffect(() => {
-    if (page !== 1) {
-      setIsLoading(prevIsLoading => !prevIsLoading);
-      fetchImages(query, page)
-        .then(({ hits }) => {
-          const imagesArray = hits.map(hit => ({
-            id: hit.id,
-            description: hit.tags,
-            smallImage: hit.webformatURL,
-            largeImage: hit.largeImageURL,
-          }));
-
-          setImages(prevImages => [...prevImages, ...imagesArray]);
-          setImagesOnPage(
-            prevImagesOnPage => prevImagesOnPage + imagesArray.length
-          );
-        })
-        .catch(error => setError(error))
-        .finally(() => setIsLoading(prevIsLoading => !prevIsLoading));
-    }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [page]);
-
-  const getSearchRequest = query => setQuery(query);
+  const getSearchRequest = query => {
+    setQuery(query);
+    setPage(1);
+  };
 
   const onNextFetch = () => setPage(prevPage => prevPage + 1);
 
