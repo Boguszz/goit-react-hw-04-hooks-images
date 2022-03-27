@@ -11,7 +11,6 @@ import Modal from 'components/Modal';
 function App() {
   const [query, setQuery] = useState('');
   const [page, setPage] = useState(1);
-  const [imagesOnPage, setImagesOnPage] = useState(0);
   const [totalImages, setTotalImages] = useState(0);
   const [isLoading, setIsLoading] = useState(false);
   const [showModal, setShowModal] = useState(false);
@@ -41,16 +40,12 @@ function App() {
         .then(imagesArray => {
           if (page === 1) {
             setImages(imagesArray);
-            setImagesOnPage(imagesArray.length);
           }
           return imagesArray;
         })
         .then(imagesArray => {
           if (page !== 1) {
             setImages(prevImages => [...prevImages, ...imagesArray]);
-            setImagesOnPage(
-              prevImagesOnPage => prevImagesOnPage + imagesArray.length
-            );
           }
         })
         .catch(error => setError(error))
@@ -83,7 +78,7 @@ function App() {
 
       {isLoading && <Loader />}
 
-      {imagesOnPage >= 12 && imagesOnPage < totalImages && (
+      {images && images.length >= 12 && images.length < totalImages && (
         <Button onNextFetch={onNextFetch} />
       )}
 
