@@ -1,4 +1,7 @@
-.button {
+import styled from '@emotion/styled';
+import { BiPlusMedical } from 'react-icons/bi';
+
+export const ButtonTemplate = styled.button`
   display: inline-flex;
   align-items: center;
   justify-content: center;
@@ -20,13 +23,13 @@
 
   cursor: pointer;
   transition: color var(--hover-animation);
-}
 
-.button:hover,
-.button:focus {
-  color: var(--accent-bg-color);
-}
+  :hover,
+  :focus {
+    color: var(--accent-bg-color);
+  }
+`;
 
-.icon {
+export const Icon = styled(BiPlusMedical)`
   margin-left: 10px;
-}
+`;

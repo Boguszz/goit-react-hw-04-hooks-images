@@ -1,4 +1,7 @@
-.backdrop {
+import styled from '@emotion/styled';
+import { BsXLg } from 'react-icons/bs';
+
+export const Backdrop = styled.div`
   position: fixed;
   top: 0;
   left: 0;
@@ -7,9 +10,9 @@
   height: 100vh;
 
   background-color: var(--backdrop-bg-color);
-}
+`;
 
-.modal {
+export const ModalContainer = styled.div`
   position: relative;
   top: 50%;
   left: 50%;
@@ -20,47 +23,39 @@
 
   background-color: var(--main-bg-color);
   box-shadow: var(--box-shadow);
-}
 
-@media screen and (min-width: 768px) {
-  .modal {
+  @media screen and (min-width: 768px) {
     width: 600px;
   }
-}
 
-@media screen and (min-width: 1440px) {
-  .modal {
+  @media screen and (min-width: 1440px) {
     width: 900px;
   }
-}
+`;
 
-.wrapper {
+export const Wrapper = styled.div`
   display: flex;
   align-items: center;
   justify-content: space-between;
 
   padding: 5px;
-}
 
-@media screen and (min-width: 768px) {
-  .wrapper {
+  @media screen and (min-width: 768px) {
     padding: 10px;
   }
-}
 
-@media screen and (min-width: 1440px) {
-  .wrapper {
+  @media screen and (min-width: 1440px) {
     padding: 30px;
   }
-}
+`;
 
-.title {
+export const Title = styled.h1`
   font-size: 15px;
   font-weight: 400;
   text-transform: capitalize;
-}
+`;
 
-.button {
+export const Button = styled.button`
   display: inline-flex;
   align-items: center;
   justify-content: center;
@@ -77,28 +72,24 @@
 
   cursor: pointer;
   transition: color var(--hover-animation);
-}
 
-.button:hover,
-.button:focus {
-  color: var(--accent-bg-color);
-}
+  :hover,
+  :focus {
+    color: var(--accent-bg-color);
+  }
 
-@media screen and (min-width: 768px) {
-  .button {
+  @media screen and (min-width: 768px) {
     width: 40px;
     height: 30px;
   }
-}
+`;
 
-.icon {
+export const Icon = styled(BsXLg)`
   width: 10px;
   height: 10px;
-}
 
-@media screen and (min-width: 768px) {
-  .icon {
+  @media screen and (min-width: 768px) {
     width: 12px;
     height: 12px;
   }
-}
+`;

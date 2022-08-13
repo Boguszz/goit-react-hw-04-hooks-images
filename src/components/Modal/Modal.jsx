@@ -1,12 +1,19 @@
 import PropTypes from 'prop-types';
 import { useEffect } from 'react';
 import { createPortal } from 'react-dom';
-import { BsXLg } from 'react-icons/bs';
-import css from './Modal.module.css';
+
+import {
+  Backdrop,
+  ModalContainer,
+  Wrapper,
+  Title,
+  Button,
+  Icon,
+} from './Modal.styled';
 
 const modalRoot = document.querySelector('#modal-root');
 
-function Modal({ onClose, currentImageUrl, currentImageDescription }) {
+const Modal = ({ onClose, currentImageUrl, currentImageDescription }) => {
   useEffect(() => {
     const handleKeyDown = e => {
       if (e.code === 'Escape') {
@@ -26,26 +33,24 @@ function Modal({ onClose, currentImageUrl, currentImageDescription }) {
   };
 
   return createPortal(
-    <div className={css.backdrop} onClick={handleClickBackdrop}>
-      <div className={css.modal}>
-        <div className={css.wrapper}>
-          {currentImageDescription && (
-            <h1 className={css.title}>{currentImageDescription}</h1>
-          )}
-          <button className={css.button} type="button" onClick={onClose}>
-            <BsXLg className={css.icon} />
-          </button>
-        </div>
+    <Backdrop onClick={handleClickBackdrop}>
+      <ModalContainer>
+        <Wrapper>
+          {currentImageDescription && <Title>{currentImageDescription}</Title>}
+          <Button type="button" onClick={onClose}>
+            <Icon />
+          </Button>
+        </Wrapper>
         <img
           src={currentImageUrl}
           alt={currentImageDescription}
           loading="lazy"
         />
-      </div>
-    </div>,
+      </ModalContainer>
+    </Backdrop>,
     modalRoot
   );
-}
+};
 
 Modal.prototype = {
   onClose: PropTypes.func.isRequired,

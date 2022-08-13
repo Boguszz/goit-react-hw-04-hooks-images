@@ -1,14 +1,13 @@
 import PropTypes from 'prop-types';
-import { BiPlusMedical } from 'react-icons/bi';
-import css from './Button.module.css';
+import { ButtonTemplate, Icon } from './Button.styled';
 
-function Button({ onNextFetch }) {
+const Button = ({ onNextFetch }) => {
   return (
-    <button className={css.button} type="button" onClick={onNextFetch}>
-      Load more <BiPlusMedical className={css.icon} />
-    </button>
+    <ButtonTemplate type="button" onClick={onNextFetch}>
+      Load more <Icon />
+    </ButtonTemplate>
   );
-}
+};
 
 Button.prototype = {
   onNextFetch: PropTypes.func.isRequired,

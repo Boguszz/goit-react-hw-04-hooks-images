@@ -1,13 +1,18 @@
 import PropTypes from 'prop-types';
-import css from './ImageGalleryItem.module.css';
+import { Item } from './ImageGalleryItem.styled';
 
-function ImageGalleryItem({ description, smallImage, largeImage, openModal }) {
+const ImageGalleryItem = ({
+  description,
+  smallImage,
+  largeImage,
+  openModal,
+}) => {
   return (
-    <li className={css.item} onClick={openModal}>
+    <Item onClick={openModal}>
       <img src={smallImage} alt={description} data-large={largeImage} />
-    </li>
+    </Item>
   );
-}
+};
 
 ImageGalleryItem.prototype = {
   description: PropTypes.string,

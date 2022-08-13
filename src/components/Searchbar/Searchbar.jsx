@@ -1,10 +1,12 @@
-import { useState } from 'react';
 import PropTypes from 'prop-types';
-import { toast } from 'react-toastify';
-import { FaSearch } from 'react-icons/fa';
-import css from './Searchbar.module.css';
+import { useState } from 'react';
 
-function Searchbar({ onSubmit }) {
+import { toast } from 'react-toastify';
+
+import { FaSearch } from 'react-icons/fa';
+import { Wrapper, Form, Button, Input } from './Searchbar.styled';
+
+const Searchbar = ({ onSubmit }) => {
   const [query, setQuery] = useState('');
 
   const onChangeInput = e => {
@@ -23,14 +25,13 @@ function Searchbar({ onSubmit }) {
   };
 
   return (
-    <header className={css.header}>
-      <form className={css.form} onSubmit={onSubmitForm}>
-        <button className={css.button} type="submit">
+    <Wrapper>
+      <Form onSubmit={onSubmitForm}>
+        <Button type="submit">
           <FaSearch size={12} />
-        </button>
+        </Button>
 
-        <input
-          className={css.input}
+        <Input
           type="text"
           autoComplete="off"
           autoFocus
@@ -38,10 +39,10 @@ function Searchbar({ onSubmit }) {
           value={query}
           onChange={onChangeInput}
         />
-      </form>
-    </header>
+      </Form>
+    </Wrapper>
   );
-}
+};
 
 Searchbar.prototype = {
   onSubmit: PropTypes.func.isRequired,

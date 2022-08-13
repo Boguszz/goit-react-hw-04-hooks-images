@@ -1,4 +1,6 @@
-.header {
+import styled from '@emotion/styled';
+
+export const Wrapper = styled.header`
   display: flex;
   align-items: center;
   justify-content: center;
@@ -7,15 +9,15 @@
 
   background-image: var(--linear-gradient);
   box-shadow: var(--box-shadow);
-}
+`;
 
-.form {
+export const Form = styled.form`
   display: flex;
   align-items: center;
   justify-content: center;
-}
+`;
 
-.button {
+export const Button = styled.button`
   display: inline-flex;
   align-items: center;
   justify-content: center;
@@ -33,14 +35,14 @@
 
   cursor: pointer;
   transition: color var(--hover-animation);
-}
 
-.button:hover,
-.button:focus {
-  color: var(--accent-bg-color);
-}
+  hover,
+  focus {
+    color: var(--accent-bg-color);
+  }
+`;
 
-.input {
+export const Input = styled.input`
   width: 180px;
   height: 30px;
   padding: 0 10px 0 10px;
@@ -52,24 +54,20 @@
   border-top-right-radius: 5px;
   border: none;
   outline: none;
-}
 
-@media screen and (min-width: 768px) {
-  .input {
+  @media screen and (min-width: 768px) {
     width: 500px;
   }
-}
 
-@media screen and (min-width: 1440px) {
-  .input {
+  @media screen and (min-width: 1440px) {
     width: 700px;
   }
-}
 
-.input:focus {
-  box-shadow: 1px 1px 5px 0px rgba(0, 0, 0, 0.75) inset;
-}
+  .input:focus {
+    box-shadow: 1px 1px 5px 0px rgba(0, 0, 0, 0.75) inset;
+  }
 
-.input::placeholder {
-  color: #929292;
-}
+  .input::placeholder {
+    color: #929292;
+  }
+`;

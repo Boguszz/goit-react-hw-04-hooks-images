@@ -1,10 +1,11 @@
 import PropTypes from 'prop-types';
 import ImageGalleryItem from 'components/ImageGalleryItem';
-import css from './ImageGallery.module.css';
 
-function ImageGallery({ images, openModal }) {
+import { List } from './ImageGallery.styled';
+
+const ImageGallery = ({ images, openModal }) => {
   return (
-    <ul className={css.container}>
+    <List>
       {images.map(({ id, description, smallImage, largeImage }) => (
         <ImageGalleryItem
           key={id}
@@ -14,9 +15,9 @@ function ImageGallery({ images, openModal }) {
           openModal={openModal}
         />
       ))}
-    </ul>
+    </List>
   );
-}
+};
 
 ImageGallery.prototype = {
   images: PropTypes.arrayOf(

@@ -1,9 +1,11 @@
 {
-  "name": "goit-react-hw-04-hooks-images",
+  "name": "gallery",
   "version": "0.1.0",
   "private": true,
-  "homepage": "https://Boguszz.github.io/goit-react-hw-04-hooks-images/",
+  "homepage": "https://Boguszz.github.io/gallery/",
   "dependencies": {
+    "@emotion/react": "^11.10.0",
+    "@emotion/styled": "^11.10.0",
     "@testing-library/jest-dom": "^5.16.1",
     "@testing-library/react": "^12.1.2",
     "@testing-library/user-event": "^13.5.0",

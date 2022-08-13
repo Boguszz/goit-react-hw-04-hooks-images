@@ -1,4 +1,6 @@
-.item {
+import styled from '@emotion/styled';
+
+export const Item = styled.li`
   width: 300px;
   margin-bottom: 15px;
 
@@ -8,19 +10,17 @@
   cursor: pointer;
   transform: scale(1);
   transition: transform var(--hover-animation);
-}
 
-.item:hover,
-.item:focus {
-  transform: scale(1.02);
-}
+  :hover,
+  :focus {
+    transform: scale(1.02);
+  }
 
-.item:last-child {
-  margin-bottom: 0;
-}
+  :last-child {
+    margin-bottom: 0;
+  }
 
-@media screen and (min-width: 768px) {
-  .item {
+  @media screen and (min-width: 768px) {
     display: flex;
     align-items: stretch;
     justify-content: center;
@@ -28,10 +28,8 @@
     width: calc((100% - 4 * 15px) / 2);
     margin: 15px;
   }
-}
 
-@media screen and (min-width: 1440px) {
-  .item {
+  @media screen and (min-width: 1440px) {
     width: calc((100% - 6 * 15px) / 3);
   }
-}
+`;
