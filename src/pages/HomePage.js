@@ -1,6 +1,6 @@
-import PropTypes, { number } from 'prop-types';
+import PropTypes from 'prop-types';
 
-import ImageGallery from 'components/ImageGallery';
+import Gallery from 'components/Gallery';
 import Button from 'components/Button';
 import Loader from 'components/Loader';
 import Modal from 'components/Modal';
@@ -18,7 +18,7 @@ const HomePage = ({
 }) => {
   return (
     <>
-      {images && <ImageGallery images={images} openModal={openModal} />}
+      {images && <Gallery images={images} openModal={openModal} />}
 
       {isLoading && <Loader />}
 
