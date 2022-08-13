@@ -2,9 +2,7 @@ import PropTypes from 'prop-types';
 import { useState } from 'react';
 
 import { toast } from 'react-toastify';
-
-import { FaSearch } from 'react-icons/fa';
-import { Wrapper, Form, Button, Input } from './Searchbar.styled';
+import { Form, Button, Icon, Input } from './Searchbar.styled';
 
 const Searchbar = ({ onSubmit }) => {
   const [query, setQuery] = useState('');
@@ -25,22 +23,20 @@ const Searchbar = ({ onSubmit }) => {
   };
 
   return (
-    <Wrapper>
-      <Form onSubmit={onSubmitForm}>
-        <Button type="submit">
-          <FaSearch size={12} />
-        </Button>
+    <Form onSubmit={onSubmitForm}>
+      <Button type="submit">
+        <Icon />
+      </Button>
 
-        <Input
-          type="text"
-          autoComplete="off"
-          autoFocus
-          placeholder="Search images and photos"
-          value={query}
-          onChange={onChangeInput}
-        />
-      </Form>
-    </Wrapper>
+      <Input
+        type="text"
+        autoComplete="off"
+        autoFocus
+        placeholder="Search images and photos"
+        value={query}
+        onChange={onChangeInput}
+      />
+    </Form>
   );
 };
 

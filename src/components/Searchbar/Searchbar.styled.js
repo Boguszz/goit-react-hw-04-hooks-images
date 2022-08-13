@@ -1,15 +1,5 @@
 import styled from '@emotion/styled';
-
-export const Wrapper = styled.header`
-  display: flex;
-  align-items: center;
-  justify-content: center;
-
-  padding: 50px 0 50px 0;
-
-  background-image: var(--linear-gradient);
-  box-shadow: var(--box-shadow);
-`;
+import { FaSearch } from 'react-icons/fa';
 
 export const Form = styled.form`
   display: flex;
@@ -40,6 +30,10 @@ export const Button = styled.button`
   focus {
     color: var(--accent-bg-color);
   }
+`;
+
+export const Icon = styled(FaSearch)`
+  color: var(--main-bg-color);
 `;
 
 export const Input = styled.input`
