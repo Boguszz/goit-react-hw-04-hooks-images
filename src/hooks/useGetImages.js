@@ -2,7 +2,7 @@ import { useState, useEffect } from 'react';
 import fetchImages from 'services/images-api';
 
 const useGetImages = () => {
-  const [query, setQuery] = useState('summer');
+  const [query, setQuery] = useState(() => 'summer');
   const [page, setPage] = useState(1);
   const [totalImages, setTotalImages] = useState(0);
   const [isLoading, setIsLoading] = useState(false);
@@ -14,14 +14,16 @@ const useGetImages = () => {
       setIsLoading(prevIsLoading => !prevIsLoading);
 
       fetchImages(query, page)
-        .then(({ hits, totalHits }) => {
-          const imagesArray = hits.map(hit => ({
-            id: hit.id,
-            description: hit.tags,
-            smallImage: hit.webformatURL,
-            largeImage: hit.largeImageURL,
-          }));
-          setTotalImages(totalHits);
+        .then(({ hits: images, totalHits: total }) => {
+          const imagesArray = images.map(
+            ({ id, tags, webformatURL, largeImageURL }) => ({
+              id: id,
+              description: tags,
+              smallImage: webformatURL,
+              largeImage: largeImageURL,
+            })
+          );
+          setTotalImages(total);
           return imagesArray;
         })
         .then(imagesArray => {

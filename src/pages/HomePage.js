@@ -1,21 +1,21 @@
+import PropTypes, { number } from 'prop-types';
+
 import ImageGallery from 'components/ImageGallery';
 import Button from 'components/Button';
 import Loader from 'components/Loader';
 import Modal from 'components/Modal';
 
-import useGetImages from 'hooks/useGetImages';
-import useModal from 'hooks/useModal';
-
-const HomePage = () => {
-  const { onNextFetch, totalImages, isLoading, images } = useGetImages();
-  const {
-    openModal,
-    toggleModal,
-    showModal,
-    currentImageUrl,
-    currentImageDescription,
-  } = useModal();
-
+const HomePage = ({
+  images,
+  openModal,
+  isLoading,
+  totalImages,
+  onNextFetch,
+  showModal,
+  toggleModal,
+  currentImageDescription,
+  currentImageUrl,
+}) => {
   return (
     <>
       {images && <ImageGallery images={images} openModal={openModal} />}
@@ -35,6 +35,25 @@ const HomePage = () => {
       )}
     </>
   );
+};
+
+HomePage.prototype = {
+  images: PropTypes.arrayOf(
+    PropTypes.shape({
+      id: PropTypes.number.isRequired,
+      description: PropTypes.string,
+      smallImage: PropTypes.string.isRequired,
+      largeImage: PropTypes.string.isRequired,
+    })
+  ).isRequired,
+  openModal: PropTypes.func.isRequired,
+  isLoading: PropTypes.bool.isRequired,
+  totalImages: PropTypes.number.isRequired,
+  onNextFetch: PropTypes.func.isRequired,
+  showModal: PropTypes.func.isRequired,
+  toggleModal: PropTypes.func.isRequired,
+  currentImageUrl: PropTypes.string,
+  currentImageDescription: PropTypes.string,
 };
 
 export default HomePage;

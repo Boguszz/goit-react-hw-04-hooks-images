@@ -1,14 +1,13 @@
+import PropTypes from 'prop-types';
 import { useEffect, useState } from 'react';
-import useGetImages from 'hooks/useGetImages';
 import randomNumberGenerator from 'helpers/randomNumberGenerator';
 
 import Searchbar from 'components/Searchbar';
 
 import { Wrapper, Title, List, Item, Link } from './Header.styled';
 
-const Header = () => {
+const Header = ({ images, getSearchRequest }) => {
   const [imageUrl, setImageUrl] = useState(null);
-  const { getSearchRequest, images } = useGetImages();
 
   useEffect(() => {
     const getOneImage = () => {
@@ -40,6 +39,18 @@ const Header = () => {
       </Wrapper>
     </>
   );
+};
+
+Header.prototype = {
+  images: PropTypes.arrayOf(
+    PropTypes.shape({
+      id: PropTypes.number.isRequired,
+      description: PropTypes.string,
+      smallImage: PropTypes.string.isRequired,
+      largeImage: PropTypes.string.isRequired,
+    })
+  ).isRequired,
+  getSearchReques: PropTypes.func.isRequired,
 };
 
 export default Header;
