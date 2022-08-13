@@ -1,19 +1,33 @@
-import PropTypes from 'prop-types';
 import { useEffect } from 'react';
 import { createPortal } from 'react-dom';
 
+import { RiDownload2Fill } from 'react-icons/ri';
+import { IoEyeSharp } from 'react-icons/io5';
+import { AiFillLike } from 'react-icons/ai';
+
 import {
   Backdrop,
-  ModalContainer,
   Wrapper,
+  Header,
   Title,
   Button,
   Icon,
+  Popup,
+  List,
+  Item,
+  Text,
 } from './Modal.styled';
 
 const modalRoot = document.querySelector('#modal-root');
 
-const Modal = ({ onClose, currentImageUrl, currentImageDescription }) => {
+const Modal = ({
+  onClose,
+  currentImageUrl,
+  currentImageDescription,
+  downloads,
+  views,
+  likes,
+}) => {
   useEffect(() => {
     const handleKeyDown = e => {
       if (e.code === 'Escape') {
@@ -34,28 +48,40 @@ const Modal = ({ onClose, currentImageUrl, currentImageDescription }) => {
 
   return createPortal(
     <Backdrop onClick={handleClickBackdrop}>
-      <ModalContainer>
-        <Wrapper>
+      <Wrapper>
+        <Header>
           {currentImageDescription && <Title>{currentImageDescription}</Title>}
           <Button type="button" onClick={onClose}>
             <Icon />
           </Button>
-        </Wrapper>
+        </Header>
+
         <img
           src={currentImageUrl}
           alt={currentImageDescription}
           loading="lazy"
         />
-      </ModalContainer>
+
+        <Popup>
+          <List>
+            <Item>
+              <RiDownload2Fill />
+              <Text>{downloads}</Text>
+            </Item>
+            <Item>
+              <IoEyeSharp />
+              <Text>{views}</Text>
+            </Item>
+            <Item>
+              <AiFillLike />
+              <Text>{likes}</Text>
+            </Item>
+          </List>
+        </Popup>
+      </Wrapper>
     </Backdrop>,
     modalRoot
   );
-};
-
-Modal.prototype = {
-  onClose: PropTypes.func.isRequired,
-  currentImageUrl: PropTypes.string,
-  currentImageDescription: PropTypes.string,
 };
 
 export default Modal;

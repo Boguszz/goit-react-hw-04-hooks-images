@@ -18,6 +18,9 @@ function App() {
     showModal,
     currentImageUrl,
     currentImageDescription,
+    currentImageViews,
+    currentImageDownloads,
+    currentImageLikes,
   } = useModal();
 
   const {
@@ -46,6 +49,9 @@ function App() {
                 toggleModal={toggleModal}
                 currentImageDescription={currentImageDescription}
                 currentImageUrl={currentImageUrl}
+                views={currentImageViews}
+                downloads={currentImageDownloads}
+                likes={currentImageLikes}
               />
             </>
           }

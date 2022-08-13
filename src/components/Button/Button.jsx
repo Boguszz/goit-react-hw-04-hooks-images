@@ -1,4 +1,3 @@
-import PropTypes from 'prop-types';
 import { ButtonTemplate, Icon } from './Button.styled';
 
 const Button = ({ onNextFetch }) => {
@@ -7,10 +6,6 @@ const Button = ({ onNextFetch }) => {
       Load more <Icon />
     </ButtonTemplate>
   );
-};
-
-Button.prototype = {
-  onNextFetch: PropTypes.func.isRequired,
 };
 
 export default Button;

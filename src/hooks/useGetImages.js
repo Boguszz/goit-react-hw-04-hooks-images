@@ -16,11 +16,22 @@ const useGetImages = () => {
       fetchImages(query, page)
         .then(({ hits: images, totalHits: total }) => {
           const imagesArray = images.map(
-            ({ id, tags, webformatURL, largeImageURL }) => ({
+            ({
+              id,
+              tags,
+              webformatURL,
+              largeImageURL,
+              views,
+              downloads,
+              likes,
+            }) => ({
               id: id,
               description: tags,
               smallImage: webformatURL,
               largeImage: largeImageURL,
+              views,
+              downloads,
+              likes,
             })
           );
           setTotalImages(total);

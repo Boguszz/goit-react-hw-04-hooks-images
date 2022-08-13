@@ -4,6 +4,9 @@ const useModal = () => {
   const [showModal, setShowModal] = useState(false);
   const [currentImageUrl, setCurrentImageUrl] = useState(null);
   const [currentImageDescription, setCurrentImageDescription] = useState(null);
+  const [currentImageViews, setCurrentImageViews] = useState(null);
+  const [currentImageDownloads, setCurrentImageDownloads] = useState(null);
+  const [currentImageLikes, setCurrentImageLikes] = useState(null);
 
   const toggleModal = () => setShowModal(prevShowModal => !prevShowModal);
 
@@ -12,6 +15,9 @@ const useModal = () => {
       setShowModal(prevShowModal => !prevShowModal);
       setCurrentImageUrl(e.target.dataset.large);
       setCurrentImageDescription(e.target.alt);
+      setCurrentImageViews(e.target.dataset.views);
+      setCurrentImageDownloads(e.target.dataset.downloads);
+      setCurrentImageLikes(e.target.dataset.likes);
     }
   };
 
@@ -21,6 +27,9 @@ const useModal = () => {
     showModal,
     currentImageUrl,
     currentImageDescription,
+    currentImageViews,
+    currentImageDownloads,
+    currentImageLikes,
   };
 };
 

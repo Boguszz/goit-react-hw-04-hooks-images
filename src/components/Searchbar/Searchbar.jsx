@@ -1,6 +1,4 @@
-import PropTypes from 'prop-types';
 import { useState } from 'react';
-
 import { toast } from 'react-toastify';
 import { Form, Button, Icon, Input } from './Searchbar.styled';
 
@@ -38,10 +36,6 @@ const Searchbar = ({ onSubmit }) => {
       />
     </Form>
   );
-};
-
-Searchbar.prototype = {
-  onSubmit: PropTypes.func.isRequired,
 };
 
 export default Searchbar;

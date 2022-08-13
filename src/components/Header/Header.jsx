@@ -1,4 +1,3 @@
-import PropTypes from 'prop-types';
 import { useEffect, useState } from 'react';
 import randomNumberGenerator from 'helpers/randomNumberGenerator';
 
@@ -39,18 +38,6 @@ const Header = ({ images, getSearchRequest }) => {
       </Wrapper>
     </>
   );
-};
-
-Header.prototype = {
-  images: PropTypes.arrayOf(
-    PropTypes.shape({
-      id: PropTypes.number.isRequired,
-      description: PropTypes.string,
-      smallImage: PropTypes.string.isRequired,
-      largeImage: PropTypes.string.isRequired,
-    })
-  ).isRequired,
-  getSearchReques: PropTypes.func.isRequired,
 };
 
 export default Header;

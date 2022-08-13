@@ -16,10 +16,9 @@ const useGetVideos = () => {
       fetchVideos(query, page)
         .then(({ hits: video, totalHits: total }) => {
           const imagesArray = video.map(
-            ({ id, tags, picture_id, videos, views, downloads, likes }) => ({
+            ({ id, tags, videos, views, downloads, likes }) => ({
               id: id,
               description: tags,
-              pictureId: picture_id,
               videos,
               views,
               downloads,

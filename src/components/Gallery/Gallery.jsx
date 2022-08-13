@@ -1,4 +1,3 @@
-import PropTypes from 'prop-types';
 import GalleryItem from 'components/GalleryItem';
 import VideoItem from 'components/VideoItem';
 
@@ -8,15 +7,28 @@ const Gallery = ({ images, openModal, video }) => {
   return (
     <List>
       {images &&
-        images.map(({ id, description, smallImage, largeImage }) => (
-          <GalleryItem
-            key={id}
-            description={description}
-            smallImage={smallImage}
-            largeImage={largeImage}
-            openModal={openModal}
-          />
-        ))}
+        images.map(
+          ({
+            id,
+            description,
+            smallImage,
+            largeImage,
+            views,
+            downloads,
+            likes,
+          }) => (
+            <GalleryItem
+              key={id}
+              description={description}
+              smallImage={smallImage}
+              largeImage={largeImage}
+              openModal={openModal}
+              views={views}
+              downloads={downloads}
+              likes={likes}
+            />
+          )
+        )}
 
       {video &&
         video.map(item => (
@@ -24,17 +36,6 @@ const Gallery = ({ images, openModal, video }) => {
         ))}
     </List>
   );
-};
-
-Gallery.prototype = {
-  images: PropTypes.arrayOf(
-    PropTypes.shape({
-      id: PropTypes.number.isRequired,
-      description: PropTypes.string,
-      smallImage: PropTypes.string.isRequired,
-      largeImage: PropTypes.string.isRequired,
-    })
-  ).isRequired,
 };
 
 export default Gallery;

@@ -15,6 +15,9 @@ const HomePage = ({
   toggleModal,
   currentImageDescription,
   currentImageUrl,
+  downloads,
+  views,
+  likes,
 }) => {
   return (
     <>
@@ -31,6 +34,9 @@ const HomePage = ({
           onClose={toggleModal}
           currentImageUrl={currentImageUrl}
           currentImageDescription={currentImageDescription}
+          downloads={downloads}
+          views={views}
+          likes={likes}
         />
       )}
     </>
@@ -44,6 +50,9 @@ HomePage.prototype = {
       description: PropTypes.string,
       smallImage: PropTypes.string.isRequired,
       largeImage: PropTypes.string.isRequired,
+      views: PropTypes.number,
+      downloads: PropTypes.number,
+      likes: PropTypes.number,
     })
   ).isRequired,
   openModal: PropTypes.func.isRequired,

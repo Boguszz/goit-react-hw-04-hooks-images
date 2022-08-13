@@ -1,19 +1,26 @@
-import PropTypes from 'prop-types';
 import { Item } from './GalleryItem.styled';
 
-const GalleryItem = ({ description, smallImage, largeImage, openModal }) => {
+const GalleryItem = ({
+  description,
+  smallImage,
+  largeImage,
+  openModal,
+  views,
+  downloads,
+  likes,
+}) => {
   return (
     <Item onClick={openModal}>
-      <img src={smallImage} alt={description} data-large={largeImage} />
+      <img
+        src={smallImage}
+        alt={description}
+        data-large={largeImage}
+        data-views={views}
+        data-downloads={downloads}
+        data-likes={likes}
+      />
     </Item>
   );
-};
-
-GalleryItem.prototype = {
-  description: PropTypes.string,
-  smallImage: PropTypes.string.isRequired,
-  largeImage: PropTypes.string.isRequired,
-  openModal: PropTypes.func.isRequired,
 };
 
 export default GalleryItem;

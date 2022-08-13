@@ -12,7 +12,7 @@ export const Backdrop = styled.div`
   background-color: var(--backdrop-bg-color);
 `;
 
-export const ModalContainer = styled.div`
+export const Wrapper = styled.div`
   position: relative;
   top: 50%;
   left: 50%;
@@ -24,6 +24,12 @@ export const ModalContainer = styled.div`
   background-color: var(--main-bg-color);
   box-shadow: var(--box-shadow);
 
+  overflow: hidden;
+
+  :hover div {
+    transform: translateY(0);
+  }
+
   @media screen and (min-width: 768px) {
     width: 600px;
   }
@@ -33,7 +39,7 @@ export const ModalContainer = styled.div`
   }
 `;
 
-export const Wrapper = styled.div`
+export const Header = styled.div`
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -92,4 +98,39 @@ export const Icon = styled(BsXLg)`
     width: 12px;
     height: 12px;
   }
+`;
+
+export const Popup = styled.div`
+  position: absolute;
+  bottom: 0;
+  left: 0;
+
+  display: flex;
+  align-items: center;
+
+  width: 100%;
+
+  color: var(--second-text-color);
+  background-color: rgba(0, 0, 0, 0.7);
+
+  transform: translateY(100%);
+  transition: transform var(--hover-animation);
+`;
+
+export const List = styled.ul`
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  width: 100%;
+`;
+
+export const Item = styled.li`
+  display: flex;
+  align-items: center;
+  padding: 10px;
+`;
+
+export const Text = styled.p`
+  margin-left: 10px;
 `;
