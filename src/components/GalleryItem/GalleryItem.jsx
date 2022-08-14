@@ -14,6 +14,7 @@ const GalleryItem = ({
       <img
         src={smallImage}
         alt={description}
+        data-description={description}
         data-large={largeImage}
         data-views={views}
         data-downloads={downloads}

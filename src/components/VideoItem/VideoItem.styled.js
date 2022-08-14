@@ -4,8 +4,6 @@ export const Item = styled.li`
   width: 300px;
   margin-bottom: 15px;
 
-  border-radius: 15px;
-
   overflow: hidden;
   cursor: pointer;
   transform: scale(1);

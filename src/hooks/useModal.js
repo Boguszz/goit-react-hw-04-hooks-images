@@ -2,22 +2,25 @@ import { useState } from 'react';
 
 const useModal = () => {
   const [showModal, setShowModal] = useState(false);
-  const [currentImageUrl, setCurrentImageUrl] = useState(null);
-  const [currentImageDescription, setCurrentImageDescription] = useState(null);
-  const [currentImageViews, setCurrentImageViews] = useState(null);
-  const [currentImageDownloads, setCurrentImageDownloads] = useState(null);
-  const [currentImageLikes, setCurrentImageLikes] = useState(null);
+  const [url, setUrl] = useState(null);
+  const [title, setTitle] = useState(null);
+  const [views, setViews] = useState(null);
+  const [downloads, setDownloads] = useState(null);
+  const [likes, setLikes] = useState(null);
 
   const toggleModal = () => setShowModal(prevShowModal => !prevShowModal);
 
   const openModal = e => {
-    if (e.target.nodeName === 'IMG') {
+    if (e.target.nodeName === 'IMG' || 'VIDEO') {
       setShowModal(prevShowModal => !prevShowModal);
-      setCurrentImageUrl(e.target.dataset.large);
-      setCurrentImageDescription(e.target.alt);
-      setCurrentImageViews(e.target.dataset.views);
-      setCurrentImageDownloads(e.target.dataset.downloads);
-      setCurrentImageLikes(e.target.dataset.likes);
+      setUrl(e.target.dataset.large);
+      setTitle(e.target.alt);
+      setTitle(e.target.dataset.description);
+      setViews(e.target.dataset.views);
+      setDownloads(e.target.dataset.downloads);
+      setLikes(e.target.dataset.likes);
+
+      console.log(e.target.nodeName);
     }
   };
 
@@ -25,11 +28,11 @@ const useModal = () => {
     openModal,
     toggleModal,
     showModal,
-    currentImageUrl,
-    currentImageDescription,
-    currentImageViews,
-    currentImageDownloads,
-    currentImageLikes,
+    url,
+    title,
+    views,
+    downloads,
+    likes,
   };
 };
 

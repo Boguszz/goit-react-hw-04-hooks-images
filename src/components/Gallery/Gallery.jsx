@@ -31,8 +31,16 @@ const Gallery = ({ images, openModal, video }) => {
         )}
 
       {video &&
-        video.map(item => (
-          <VideoItem key={item.id} videoUrl={item.videos.large.url} />
+        video.map(({ id, videos, downloads, likes, views, description }) => (
+          <VideoItem
+            key={id}
+            description={description}
+            videoUrl={videos.large.url}
+            downloads={downloads}
+            likes={likes}
+            views={views}
+            openModal={openModal}
+          />
         ))}
     </List>
   );

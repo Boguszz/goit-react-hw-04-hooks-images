@@ -49,4 +49,8 @@ export const Link = styled(NavLink)`
   :focus {
     color: var(--main-text-color);
   }
+
+  &.active {
+    color: var(--accent-text-color);
+  }
 `;

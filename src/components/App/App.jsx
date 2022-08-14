@@ -16,11 +16,11 @@ function App() {
     openModal,
     toggleModal,
     showModal,
-    currentImageUrl,
-    currentImageDescription,
-    currentImageViews,
-    currentImageDownloads,
-    currentImageLikes,
+    url,
+    title,
+    views,
+    downloads,
+    likes,
   } = useModal();
 
   const {
@@ -47,11 +47,11 @@ function App() {
                 onNextFetch={onNextFetch}
                 showModal={showModal}
                 toggleModal={toggleModal}
-                currentImageDescription={currentImageDescription}
-                currentImageUrl={currentImageUrl}
-                views={currentImageViews}
-                downloads={currentImageDownloads}
-                likes={currentImageLikes}
+                title={title}
+                url={url}
+                views={views}
+                downloads={downloads}
+                likes={likes}
               />
             </>
           }
@@ -70,6 +70,14 @@ function App() {
                 isLoading={isLoadingVideo}
                 totalVideo={totalVideo}
                 onNextFetch={onNextFetchVideo}
+                showModal={showModal}
+                toggleModal={toggleModal}
+                openModal={openModal}
+                title={title}
+                url={url}
+                views={views}
+                downloads={downloads}
+                likes={likes}
               />
             </>
           }

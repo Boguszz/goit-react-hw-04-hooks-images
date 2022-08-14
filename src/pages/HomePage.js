@@ -1,9 +1,8 @@
-import PropTypes from 'prop-types';
-
 import Gallery from 'components/Gallery';
 import Button from 'components/Button';
 import Loader from 'components/Loader';
 import Modal from 'components/Modal';
+import Information from 'components/Information';
 
 const HomePage = ({
   images,
@@ -13,8 +12,8 @@ const HomePage = ({
   onNextFetch,
   showModal,
   toggleModal,
-  currentImageDescription,
-  currentImageUrl,
+  title,
+  url,
   downloads,
   views,
   likes,
@@ -30,39 +29,18 @@ const HomePage = ({
       )}
 
       {showModal && (
-        <Modal
-          onClose={toggleModal}
-          currentImageUrl={currentImageUrl}
-          currentImageDescription={currentImageDescription}
-          downloads={downloads}
-          views={views}
-          likes={likes}
-        />
+        <Modal onClose={toggleModal} title={title}>
+          <Information
+            url={url}
+            description={title}
+            downloads={downloads}
+            likes={likes}
+            views={views}
+          />
+        </Modal>
       )}
     </>
   );
-};
-
-HomePage.prototype = {
-  images: PropTypes.arrayOf(
-    PropTypes.shape({
-      id: PropTypes.number.isRequired,
-      description: PropTypes.string,
-      smallImage: PropTypes.string.isRequired,
-      largeImage: PropTypes.string.isRequired,
-      views: PropTypes.number,
-      downloads: PropTypes.number,
-      likes: PropTypes.number,
-    })
-  ).isRequired,
-  openModal: PropTypes.func.isRequired,
-  isLoading: PropTypes.bool.isRequired,
-  totalImages: PropTypes.number.isRequired,
-  onNextFetch: PropTypes.func.isRequired,
-  showModal: PropTypes.func.isRequired,
-  toggleModal: PropTypes.func.isRequired,
-  currentImageUrl: PropTypes.string,
-  currentImageDescription: PropTypes.string,
 };
 
 export default HomePage;
